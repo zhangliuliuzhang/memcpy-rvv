@@ -34,10 +34,10 @@ void *memchr(const void *src, int c, size_t n) {
         }
 
         while (n != 0) {
-            size_t vl = __riscv_vsetvl_e8m4(n);
-            vuint8m4_t v_data = __riscv_vle8_v_u8m4(s, vl);
-            vbool2_t mask = __riscv_vmseq_vx_u8m4_b2(v_data, target, vl);
-            long idx = __riscv_vfirst_m_b2(mask, vl);
+            size_t vl = __riscv_vsetvl_e8m8(n);
+            vuint8m8_t v_data = __riscv_vle8_v_u8m8(s, vl);
+            vbool1_t mask = __riscv_vmseq_vx_u8m8_b1(v_data, target, vl);
+            long idx = __riscv_vfirst_m_b1(mask, vl);
 
             if (idx >= 0) {
                 return (void *)(s + idx);
